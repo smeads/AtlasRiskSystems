@@ -4,7 +4,8 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
+  entry: {
+    app: [
     // activate HMR for React
     'react-hot-loader/patch',
     // bundle the client for webpack-dev-server and connect to the provided endpoint
@@ -13,10 +14,11 @@ module.exports = {
     'webpack/hot/only-dev-server',
     // the entry point of our app
     './src/index.js'
-  ],
+    ]
+  },
   output: {
     // the output bundle
-    filename: 'bundle.js',
+    filename: 'js/[name].bundle.js',
     path: resolve(__dirname, 'build'),
     // necessary for HMR to know where to load the hot update chunks
     publicPath: '/'
