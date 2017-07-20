@@ -6,31 +6,22 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: [
-    // activate HMR for React
-    'react-hot-loader/patch',
-    // bundle the client for webpack-dev-server and connect to the provided endpoint
-    'webpack-dev-server/client?http://localhost:8080',
-    // bundle the client for hot reloading only- means to only hot reload for successful updates
-    'webpack/hot/only-dev-server',
-    // the entry point of our app
-    './src/index.js'
+      'react-hot-loader/patch', // activate HMR for React
+      'webpack-dev-server/client?http://localhost:8080', // bundle the client for webpack-dev-server and connect to the provided endpoint
+      'webpack/hot/only-dev-server', // bundle the client for hot reloading only- means to only hot reload for successful updates
+      './src/index.js' // the entry point of our app
     ]
   },
   output: {
-    // the output bundle
-    filename: 'js/[name].bundle.js',
+    filename: 'js/[name].bundle.js', // the output bundle
     path: resolve(__dirname, 'build'),
-    // necessary for HMR to know where to load the hot update chunks
-    publicPath: '/'
+    publicPath: '/' // necessary for HMR to know where to load the hot update chunks
   },
   devtool: 'inline-source-map',
   devServer: {
-    // enable HMR on the server
-    hot: true,
-    // match the output path
-    contentBase: resolve(__dirname, 'build'),
-    // match the output `publicPath`
-    publicPath: '/'
+    hot: true, // enable HMR on the server
+    contentBase: resolve(__dirname, 'build'), // match the output path
+    publicPath: '/' // match the output `publicPath`
   },
   module: {
     rules: [
@@ -50,10 +41,8 @@ module.exports = {
     ],
   },
   plugins: [
-    // enable HMR globally
-    new webpack.HotModuleReplacementPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+    new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
     new HtmlWebpackPlugin({
       hash: true,
       template: './src/index.html',
