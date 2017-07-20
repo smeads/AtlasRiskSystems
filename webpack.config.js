@@ -33,13 +33,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader?modules', ],
+      },
+      {
+        test: /\.scss$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.(js|jsx)$/,
         use: [ 'babel-loader', ],
         exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader?modules', ],
       },
     ],
   },
