@@ -1,0 +1,4 @@
+This file is only a placeholder until we have actual actions, otherwise it's not
+reflected on GitHub.
+
+Remove file once there is an action.

@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { resolve } = require('path');
 const webpack = require('webpack');
-const bootstrapEntryPoints = require('./webpack.bootstrap.config');
 const glob = require('glob');
 const PurifyCSSPlugin = require('purifycss-webpack');
 
@@ -15,7 +14,7 @@ const cssDev = [
     loader: 'sass-resources-loader',
     options: {
       // Provide path to the file with resources
-      resources: ['./src/resources.scss'],
+      resources: ['./src/app.scss'],
     },
   },
 ];
@@ -29,7 +28,7 @@ const cssProd = ExtractTextPlugin.extract({
       loader: 'sass-resources-loader',
       options: {
         // Provide path to the file with resources
-        resources: ['./src/resources.scss'],
+        resources: ['./src/app.scss'],
       },
     },
   ],
@@ -38,8 +37,6 @@ const cssProd = ExtractTextPlugin.extract({
 
 const cssConfig = isProd ? cssProd : cssDev;
 
-const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
-
 module.exports = {
   entry: {
     app: [
@@ -47,8 +44,7 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:8080', // bundle the client for webpack-dev-server and connect to the provided endpoint
       'webpack/hot/only-dev-server', // bundle the client for hot reloading only- means to only hot reload for successful updates
       './src/index.js' // the entry point of our app
-    ],
-    bootstrap: bootstrapConfig // vendor entry point for (bootstrap)
+    ]
   },
   output: {
     filename: 'js/[name].bundle.js', // the output bundle
@@ -83,11 +79,6 @@ module.exports = {
       {
         test: /\.(ttf|eot)$/,
         use: 'file-loader?name=/fonts/[name].[ext]'
-      },
-      // Bootstrap 3
-      {
-        test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
-        use: 'imports-loader?jQuery=jquery'
       },
     ],
   },
